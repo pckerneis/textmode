@@ -153,6 +153,34 @@ button:hover {
   color: var(--error);
 }
 
+/* Explicit layout toggle (id+class beats the plain #panels/#editor-panel
+   selectors in the media query below, so an explicit choice always wins
+   regardless of viewport width). With neither class set, the media query
+   still auto-stacks on narrow screens. */
+#panels.layout-row {
+  flex-direction: row;
+}
+#panels.layout-row #editor-panel, #panels.layout-row #preview-panel {
+  width: 50%;
+  height: auto;
+}
+#panels.layout-row #editor-panel {
+  border-right: 1px solid var(--border);
+  border-bottom: none;
+}
+
+#panels.layout-column {
+  flex-direction: column;
+}
+#panels.layout-column #editor-panel, #panels.layout-column #preview-panel {
+  width: 100%;
+  height: 50%;
+}
+#panels.layout-column #editor-panel {
+  border-right: none;
+  border-bottom: 1px solid var(--border);
+}
+
 @media (max-width: 800px) {
   #panels {
     flex-direction: column;

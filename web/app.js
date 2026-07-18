@@ -10,6 +10,8 @@
   var runBtn = document.getElementById('run-btn');
   var stopBtn = document.getElementById('stop-btn');
   var shareBtn = document.getElementById('share-btn');
+  var layoutBtn = document.getElementById('layout-btn');
+  var panelsEl = document.getElementById('panels');
   var statusEl = document.getElementById('status');
   var logEl = document.getElementById('log-line');
 
@@ -107,6 +109,44 @@
       flashStatus('Link updated in address bar');
     }
   });
+
+  // --- layout toggle (side-by-side vs stacked), remembered across visits ---
+
+  var LAYOUT_KEY = 'textmode:layout';
+
+  function applyLayout(layout) {
+    panelsEl.classList.remove('layout-row', 'layout-column');
+    if (layout === 'row' || layout === 'column') {
+      panelsEl.classList.add('layout-' + layout);
+    }
+    // Label names the action a click performs, not the current state.
+    layoutBtn.textContent = currentLayout() === 'column' ? '⋮ Side by side' : '⋮ Stacked';
+  }
+
+  function currentLayout() {
+    return panelsEl.classList.contains('layout-column') ? 'column' : 'row';
+  }
+
+  layoutBtn.addEventListener('click', function () {
+    var next = currentLayout() === 'row' ? 'column' : 'row';
+    applyLayout(next);
+    try {
+      localStorage.setItem(LAYOUT_KEY, next);
+    } catch (e) {
+      // localStorage unavailable (private browsing, etc) - toggle still
+      // works for this page load, it just won't persist.
+    }
+  });
+
+  (function initLayout() {
+    var saved = null;
+    try {
+      saved = localStorage.getItem(LAYOUT_KEY);
+    } catch (e) {
+      saved = null;
+    }
+    applyLayout(saved);
+  }());
 
   function loadFromHash() {
     var hash = window.location.hash;
