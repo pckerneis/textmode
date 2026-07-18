@@ -1,3 +1,35 @@
+```
+ ▓█▓█▓▓▓▓. ▓▒▓▒▓▒.  ▒▒.   ▒▒. ▒▒▒▒▒▒▒▒. ▒▒.     ▒▒.  ░▒░▒░▒.  ░░░░░░.   ░░░░░░.
+    ▓█.    ██.       ▓█. ▓█.     ▓▓.    ▓▓▓▓. ▒▓▒▒. ▒▒.   ▒▒. ▒░.  ▒░.  ░░.
+    ██.    █▓▓█.      ██▓█.      ▒▓.    ▒▒. ▒▒. ▒▒. ▒▒.   ▒▒. ▒▒.   ░▒. ▒░░░.
+    █▓.    ██.       ██. ▒█.     ▓▒.    █▒.     ▒█. ▒▒.   ▒▒. ▒▒.  ▒▒.  ░▒.
+    ▓▓.    ██▓▓██.  ██.   ██.    ██.    ▓█.     ▓▓.  ▓▓▓▒▓▒.  ▓▒▓▓▒▒.   ▒░▒░▒░.
+
+           A  platform  for  text-mode  experiments  and animation
+                 with  plain  JS  programs  in  your  terminal
+
+                built-in constants:
+                ~~~~~~~~
+                  . x, y, width, height, fps & frame
+
+                SHADER mode:
+                ~~~~~~
+                  . char(), fg() & bg()
+
+                GRID mode:
+                ~~~~
+                  . frame(grid)
+
+                CLI:
+                ~~~
+                  . textmode run <file> fps=30 w=80 h=25
+
+                WEB:
+                ~~~
+                  . textmode.cloud
+
+```
+
 # TEXTMODE
 
 A platform for text based demos and animated visual experimentation.
@@ -6,6 +38,8 @@ TEXTMODE is a zero-dependency CLI that runs small JS files ("text shaders")
 and renders their output as an animated, colored grid of characters in your
 terminal. No npm packages, no build step, no ES6 magic - plain old JS
 functions in, ANSI escape codes out.
+
+It doubles as a web editor to quickly get started and share creations. It is live at https://textmode.cloud.
 
 ## Install
 
@@ -159,7 +193,7 @@ uploaded anywhere).
 npm run web
 ```
 
-Then open `http://localhost:4173/web/`. Shader code runs inside a
+Then open `http://localhost:4173/`. Shader code runs inside a
 sandboxed iframe (`sandbox="allow-scripts"`, no network access) so opening
 someone else's share link can't touch this page's DOM, storage, or
 cookies.
