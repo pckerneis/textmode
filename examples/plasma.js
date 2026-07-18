@@ -5,6 +5,7 @@ var CHARS = ' .:-=+*#%@';
 var PALETTE = ['blue', 'cyan', 'green', 'yellow', 'red', 'magenta'];
 
 function value() {
+  var time = frame / fps;
   var v = Math.sin(x * 0.2 + time) +
           Math.sin(y * 0.15 + time * 1.3) +
           Math.sin((x + y) * 0.1 + time * 0.7) +

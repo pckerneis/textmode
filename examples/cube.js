@@ -160,6 +160,7 @@ function fillPolygon(buffer, cols, rows, points, color) {
 }
 
 exports.frame = function (grid) {
+  var time = frame / fps;
   var ax = time * 0.6;
   var ay = time * 0.9;
   var rotated = [];
