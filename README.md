@@ -5,8 +5,8 @@
     █▓.    ██.       ██. ▒█.     ▓▒.    █▒.     ▒█. ▒▒.   ▒▒. ▒▒.  ▒▒.  ░▒.
     ▓▓.    ██▓▓██.  ██.   ██.    ██.    ▓█.     ▓▓.  ▓▓▓▒▓▒.  ▓▒▓▓▒▒.   ▒░▒░▒░.
 
-           A  platform  for  text-mode  experiments  and animation
-                 with  plain  JS  programs  in  your  terminal
+            A  platform  for  text-mode  experiments  and  animation
+           with  plain  JS  programs  in  your  terminal  or  browser
 
                 built-in constants:
                 ~~~~~~~~
