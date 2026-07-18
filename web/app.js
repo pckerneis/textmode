@@ -11,6 +11,8 @@
   var stopBtn = document.getElementById('stop-btn');
   var shareBtn = document.getElementById('share-btn');
   var layoutBtn = document.getElementById('layout-btn');
+  var fullscreenBtn = document.getElementById('fullscreen-btn');
+  var previewPanel = document.getElementById('preview-panel');
   var panelsEl = document.getElementById('panels');
   var statusEl = document.getElementById('status');
   var logEl = document.getElementById('log-line');
@@ -147,6 +149,29 @@
     }
     applyLayout(saved);
   }());
+
+  // --- fullscreen preview (visualisation only, fit to screen) ---
+
+  function isFullscreen() {
+    return document.fullscreenElement === previewPanel;
+  }
+
+  fullscreenBtn.addEventListener('click', function () {
+    if (isFullscreen()) {
+      document.exitFullscreen();
+    } else if (previewPanel.requestFullscreen) {
+      previewPanel.requestFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function () {
+    fullscreenBtn.textContent = isFullscreen() ? '✕ Exit fullscreen' : '⛶ Fullscreen';
+    // No manual nudge needed: the iframe is cross-origin (sandboxed, no
+    // allow-same-origin) so we can't reach into its window from here, but
+    // the browser already fires a native "resize" event inside it whenever
+    // its rendered box size changes, and sandbox.html's own resize handler
+    // picks that up to re-fit the grid.
+  });
 
   function loadFromHash() {
     var hash = window.location.hash;
