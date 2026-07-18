@@ -20,7 +20,6 @@ You can also just run it directly with `node bin/textmode.js`.
 
 ```
 textmode run <file> [fps=30] [w=80] [h=25] [seconds=N]
-textmode list
 textmode help
 ```
 
@@ -118,7 +117,7 @@ brightmagenta brightcyan brightwhite default
 ## How it works
 
 - `bin/textmode.js` - entry point, delegates to `lib/cli.js`
-- `lib/cli.js` - argument parsing and subcommands (`run`, `list`, `help`)
+- `lib/cli.js` - argument parsing and subcommands (`run`, `help`)
 - `lib/loader.js` - reads a shader file and runs it in a `vm` sandbox
 - `lib/render.js` - owns the screen buffer, the animation loop, and drawing
   frames to the terminal with ANSI escape codes
