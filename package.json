@@ -1,0 +1,13 @@
+{
+  "name": "textmode",
+  "version": "0.1.0",
+  "description": "A platform for text based demos and animated visual experimentation.",
+  "bin": {
+    "textmode": "./bin/textmode.js"
+  },
+  "main": "lib/render.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "license": "MIT"
+}

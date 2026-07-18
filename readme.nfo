@@ -1,0 +1,28 @@
+ ▓█▓█▓▓▓▓. ▓▒▓▒▓▒.  ▒▒.   ▒▒. ▒▒▒▒▒▒▒▒. ▒▒.     ▒▒.  ░▒░▒░▒.  ░░░░░░.   ░░░░░░
+    ▓█.    ██        ▓█. ▓█.     ▓▓.    ▓▓▓▓. ▒▓▒▒. ▒▒.   ▒▒. ▒░.  ▒░.  ░░
+    ██.    █▓▓█.      ██▓█.      ▒▓.    ▒▒. ▒▒. ▒▒. ▒▒.   ▒▒. ▒▒.   ░▒. ▒░░░
+    █▓.    ██.       ██. ▒█.     ▓▒.    █▒.     ▒█. ▒▒.   ▒▒. ▒▒.  ▒▒.  ░▒
+    ▓▓.    ██▓▓██.  ██.   ██.    ██.    ▓█.     ▓▓.  ▓▓▓▒▓▒.  ▓▒▓▓▒▒.   ▒░▒░▒░
+
+
+           A  platform  for  text-mode  experiments  and animation
+                 with  plain  JS  programs  in  your  terminal
+
+                                   ~~~~~~
+                
+                SHADER mode:
+                ~~~~~~
+                  . char(x,y,t)
+                  . fg(x,y,t)
+                  . bg(x,y,t)
+
+                GRID mode:
+                ~~~~
+                  . frame(grid,t,cols,rows)
+
+                A simple CLI:
+
+                  . textmode run <file> fps=30 w=80 h=25
+                  . textmode explore <url>
+                
+                                HAVE FUN
