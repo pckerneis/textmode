@@ -148,6 +148,22 @@ exports.fg = function (x, y, t, cols, rows) {
 | `examples/fire.js` | frame | Doom-style fire effect |
 | `examples/cube.js` | frame | Solid-shaded cube spinning in 3D |
 
+## Web editor
+
+`web/` is a browser-based editor: a code panel on one side, a live preview
+on the other, with controls for fps/width/height and a share-link button
+that encodes your shader + options into the URL (no backend, nothing is
+uploaded anywhere).
+
+```
+npm run web
+```
+
+Then open `http://localhost:4173/web/`. Shader code runs inside a
+sandboxed iframe (`sandbox="allow-scripts"`, no network access) so opening
+someone else's share link can't touch this page's DOM, storage, or
+cookies.
+
 ## How it works
 
 - `bin/textmode.js` - entry point, delegates to `lib/cli.js`

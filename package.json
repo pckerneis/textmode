@@ -10,7 +10,8 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build:exe": "node scripts/build-exe.js"
+    "build:exe": "node scripts/build-exe.js",
+    "web": "node scripts/serve-web.js"
   },
   "license": "MIT",
   "devDependencies": {

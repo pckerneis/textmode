@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>textmode</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="toolbar">
+    <span id="logo">textmode</span>
+
+    <label class="field">
+      Example
+      <select id="example-select"></select>
+    </label>
+
+    <label class="field">
+      FPS
+      <input id="fps-input" type="number" min="1" max="120" step="1" value="30">
+    </label>
+
+    <label class="field">
+      W
+      <input id="width-input" type="number" min="1" max="300" step="1" value="80">
+    </label>
+
+    <label class="field">
+      H
+      <input id="height-input" type="number" min="1" max="150" step="1" value="25">
+    </label>
+
+    <button id="run-btn" title="Run (Ctrl/Cmd+Enter)">&#9654; Run</button>
+    <button id="stop-btn" title="Stop">&#9632; Stop</button>
+    <button id="share-btn" title="Copy a share link">&#128279; Share</button>
+    <button id="layout-btn" title="Toggle editor/preview layout">&#8942; Layout</button>
+
+    <span id="status"></span>
+  </header>
+
+  <main id="panels">
+    <section id="editor-panel">
+      <textarea id="editor"></textarea>
+    </section>
+    <section id="preview-panel">
+      <iframe id="preview" title="Preview" sandbox="allow-scripts" src="sandbox.html"></iframe>
+    </section>
+  </main>
+
+  <footer id="log-bar">
+    <span id="log-line"></span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="examples.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
