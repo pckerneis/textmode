@@ -12,6 +12,9 @@
   var shareBtn = document.getElementById('share-btn');
   var layoutBtn = document.getElementById('layout-btn');
   var fullscreenBtn = document.getElementById('fullscreen-btn');
+  var helpBtn = document.getElementById('help-btn');
+  var helpDialog = document.getElementById('help-dialog');
+  var helpCloseBtn = document.getElementById('help-close-btn');
   var previewPanel = document.getElementById('preview-panel');
   var panelsEl = document.getElementById('panels');
   var statusEl = document.getElementById('status');
@@ -201,6 +204,26 @@
       statusEl.textContent = '';
     }, 3000);
   }
+
+  // --- help popup ---
+
+  helpBtn.addEventListener('click', function () {
+    helpDialog.showModal();
+  });
+
+  helpCloseBtn.addEventListener('click', function () {
+    helpDialog.close();
+  });
+
+  helpDialog.addEventListener('click', function (e) {
+    // A click that lands on the dialog element itself (not one of its
+    // children) means the backdrop was clicked, since <dialog> only
+    // covers its content box - the ::backdrop pseudo-element is outside
+    // that box but still bubbles clicks up to the dialog as target.
+    if (e.target === helpDialog) {
+      helpDialog.close();
+    }
+  });
 
   // --- run / stop, wired to the sandboxed preview iframe ---
 

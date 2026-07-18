@@ -47,6 +47,7 @@
     <div class="view-actions">
       <button id="layout-btn" class="action action-quiet" title="Toggle editor/preview layout">Layout</button>
       <button id="fullscreen-btn" class="action action-quiet" title="Fullscreen preview">Fullscreen</button>
+      <button id="help-btn" class="action action-quiet" title="Help">Help</button>
     </div>
 
     <span id="status"></span>
@@ -77,6 +78,73 @@
     <span id="log-line"></span>
   </footer>
 </div>
+
+<dialog id="help-dialog">
+  <div class="help-head">
+    <span class="help-title">Help</span>
+    <button id="help-close-btn" class="action action-quiet" aria-label="Close help">&times;</button>
+  </div>
+  <div class="help-body">
+    <p>
+      A shader is a bit of JS that exports either per-cell functions or one
+      whole-buffer function. TEXTMODE calls it once per frame (per cell, or
+      for the whole grid) and draws the result.
+    </p>
+
+    <h3>Per-cell style</h3>
+    <p>Simplest style - called once per cell, per frame:</p>
+    <pre>exports.char = function () {
+  return '#';        // a single character
+};
+
+exports.fg = function () {
+  return 'green';    // foreground color (optional)
+};
+
+exports.bg = function () {
+  return 'default';  // background color (optional)
+};</pre>
+
+    <h3>Whole-buffer style</h3>
+    <p>For effects that need to remember state or look at neighboring
+      cells, export a single <code>frame</code> function instead:</p>
+    <pre>exports.frame = function (buffer) {
+  // buffer[y][x] = { ch, fg, bg } - mutate cells in place
+  buffer[0][0].ch = '@';
+  buffer[0][0].fg = 'red';
+};</pre>
+
+    <h3>Available variables</h3>
+    <p>These are ready to use as bare identifiers inside your functions:</p>
+    <table>
+      <tr><td><code>x</code>, <code>y</code></td><td>column/row of the cell being drawn (per-cell style only)</td></tr>
+      <tr><td><code>width</code>, <code>height</code></td><td>grid size in columns/rows</td></tr>
+      <tr><td><code>fps</code></td><td>the frames-per-second setting</td></tr>
+      <tr><td><code>frame</code></td><td>frame count since the shader started (divide by <code>fps</code> to get elapsed seconds)</td></tr>
+    </table>
+
+    <h3>Colors</h3>
+    <p><code>fg</code>/<code>bg</code> accept a name:</p>
+    <pre>black red green yellow blue magenta cyan white
+gray brightred brightgreen brightyellow brightblue
+brightmagenta brightcyan brightwhite default</pre>
+    <p>...or a 256-color palette index (an integer from <code>0</code> to <code>255</code>):</p>
+    <pre>exports.fg = function () {
+  return 196;  // bright red, from the 256-color palette
+};</pre>
+
+    <h3>Toolbar</h3>
+    <table>
+      <tr><td>Example</td><td>load a bundled shader into the editor</td></tr>
+      <tr><td>FPS / W&times;H</td><td>frame rate and grid size</td></tr>
+      <tr><td>Run</td><td>run the shader (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Enter</kbd>)</td></tr>
+      <tr><td>Stop</td><td>stop the animation</td></tr>
+      <tr><td>Share</td><td>copy a link with the code and options baked in - nothing is uploaded</td></tr>
+      <tr><td>Layout</td><td>toggle side-by-side vs stacked panels</td></tr>
+      <tr><td>Fullscreen</td><td>fill the screen with just the preview</td></tr>
+    </table>
+  </div>
+</dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>

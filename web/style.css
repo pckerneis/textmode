@@ -349,6 +349,103 @@ button, input, select {
   height: 100%;
 }
 
+/* --- help dialog --- */
+
+#help-dialog {
+  width: min(560px, 90vw);
+  max-height: 80vh;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+#help-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.help-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.help-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.help-body {
+  padding: 4px 16px 16px;
+  overflow-y: auto;
+  max-height: calc(80vh - 41px);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.help-body h3 {
+  margin: 18px 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+}
+
+.help-body h3:first-child {
+  margin-top: 8px;
+}
+
+.help-body p {
+  margin: 6px 0;
+  color: var(--text);
+}
+
+.help-body code {
+  font-family: var(--mono);
+  color: var(--accent);
+}
+
+.help-body kbd {
+  font-family: var(--mono);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 11px;
+  color: var(--text);
+}
+
+.help-body pre {
+  margin: 6px 0;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--border-dim);
+  overflow-x: auto;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.help-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+}
+
+.help-body table td {
+  padding: 4px 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.help-body table td:first-child {
+  white-space: nowrap;
+  padding-right: 14px;
+  color: var(--dim);
+}
+
 @media (max-width: 800px) {
   #panels {
     flex-direction: column;
