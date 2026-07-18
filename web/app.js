@@ -122,7 +122,7 @@
       panelsEl.classList.add('layout-' + layout);
     }
     // Label names the action a click performs, not the current state.
-    layoutBtn.textContent = currentLayout() === 'column' ? '⋮ Side by side' : '⋮ Stacked';
+    layoutBtn.textContent = currentLayout() === 'column' ? 'Side by side' : 'Stacked';
   }
 
   function currentLayout() {
@@ -165,7 +165,7 @@
   });
 
   document.addEventListener('fullscreenchange', function () {
-    fullscreenBtn.textContent = isFullscreen() ? '✕ Exit fullscreen' : '⛶ Fullscreen';
+    fullscreenBtn.textContent = isFullscreen() ? 'Exit fullscreen' : 'Fullscreen';
     // No manual nudge needed: the iframe is cross-origin (sandboxed, no
     // allow-same-origin) so we can't reach into its window from here, but
     // the browser already fires a native "resize" event inside it whenever

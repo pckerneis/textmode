@@ -10,45 +10,68 @@
 <body>
 <div id="app">
   <header id="toolbar">
-    <span id="logo">textmode</span>
+    <span id="logo">textmode<span class="cursor" aria-hidden="true">_</span></span>
+
+    <span class="tsep" aria-hidden="true"></span>
 
     <label class="field">
-      Example
-      <select id="example-select"></select>
+      <span class="field-label">Example</span>
+      <span class="select-wrap">
+        <select id="example-select"></select>
+      </span>
     </label>
 
+    <span class="tsep" aria-hidden="true"></span>
+
     <label class="field">
-      FPS
+      <span class="field-label">FPS</span>
       <input id="fps-input" type="number" min="1" max="120" step="1" value="30">
     </label>
 
-    <label class="field">
-      W
-      <input id="width-input" type="number" min="1" max="300" step="1" value="80">
-    </label>
+    <span class="tsep" aria-hidden="true"></span>
 
     <label class="field">
-      H
-      <input id="height-input" type="number" min="1" max="150" step="1" value="25">
+      <input id="width-input" type="number" min="1" max="300" step="1" value="80" aria-label="Width">
+      <span class="field-x" aria-hidden="true">&times;</span>
+      <input id="height-input" type="number" min="1" max="150" step="1" value="25" aria-label="Height">
     </label>
 
-    <button id="run-btn" title="Run (Ctrl/Cmd+Enter)">&#9654; Run</button>
-    <button id="stop-btn" title="Stop">&#9632; Stop</button>
-    <button id="share-btn" title="Copy a share link">&#128279; Share</button>
-    <button id="layout-btn" title="Toggle editor/preview layout">&#8942; Layout</button>
-    <button id="fullscreen-btn" title="Fullscreen preview">&#9974; Fullscreen</button>
+    <span class="tsep" aria-hidden="true"></span>
+
+    <div class="actions">
+      <button id="run-btn" class="action action-run" title="Run (Ctrl/Cmd+Enter)">&#9654; Run</button>
+      <button id="stop-btn" class="action action-stop" title="Stop">&#9632; Stop</button>
+      <button id="share-btn" class="action" title="Copy a share link">&#10697; Share</button>
+    </div>
+
+    <div class="view-actions">
+      <button id="layout-btn" class="action action-quiet" title="Toggle editor/preview layout">Layout</button>
+      <button id="fullscreen-btn" class="action action-quiet" title="Fullscreen preview">Fullscreen</button>
+    </div>
 
     <span id="status"></span>
   </header>
 
+  <div class="hrule" aria-hidden="true"></div>
+
   <main id="panels">
     <section id="editor-panel">
+      <div class="panel-head">
+        <span class="panel-title">Editor</span>
+        <span class="panel-rule" aria-hidden="true"></span>
+      </div>
       <textarea id="editor"></textarea>
     </section>
     <section id="preview-panel">
+      <div class="panel-head">
+        <span class="panel-title">Preview</span>
+        <span class="panel-rule" aria-hidden="true"></span>
+      </div>
       <iframe id="preview" title="Preview" sandbox="allow-scripts" src="sandbox.html"></iframe>
     </section>
   </main>
+
+  <div class="hrule" aria-hidden="true"></div>
 
   <footer id="log-bar">
     <span id="log-line"></span>
