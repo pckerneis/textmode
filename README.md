@@ -16,6 +16,29 @@ npm link
 This puts a `textmode` command on your PATH (see `bin/textmode.js`).
 You can also just run it directly with `node bin/textmode.js`.
 
+### Building a self-contained executable
+
+If you don't want to depend on a Node install, you can build a standalone
+binary using Node's [Single Executable Applications](https://nodejs.org/api/single-executable-applications.html)
+feature:
+
+```
+npm install
+npm run build:exe
+```
+
+This produces `dist/textmode` (or `dist/textmode.exe` on Windows) - a
+single native binary with the CLI and the Node runtime baked in. It runs
+on its own, with no `node` or `npm` required on the target machine:
+
+```
+dist/textmode run examples/plasma.js
+```
+
+The build step itself uses `esbuild` (to bundle the CLI into one file)
+and `postject` (to inject it into a copy of the Node binary) as
+dev-only tooling - the shipped executable has no dependencies.
+
 ## Usage
 
 ```
@@ -102,6 +125,15 @@ Available color names for `fg`/`bg`:
 black red green yellow blue magenta cyan white
 gray brightred brightgreen brightyellow brightblue
 brightmagenta brightcyan brightwhite default
+```
+
+`fg`/`bg` also accept a 256-color palette index (an integer from `0` to
+`255`) instead of a name:
+
+```js
+exports.fg = function (x, y, t, cols, rows) {
+  return 196;           // bright red, from the 256-color palette
+};
 ```
 
 ## Examples

@@ -9,5 +9,12 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "license": "MIT"
+  "scripts": {
+    "build:exe": "node scripts/build-exe.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "postject": "^1.0.0-alpha.6"
+  }
 }
