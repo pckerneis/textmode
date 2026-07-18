@@ -6,7 +6,7 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
-var ROOT = path.join(__dirname, '..');
+var ROOT = path.join(__dirname, '..', 'web');
 var PORT = process.env.PORT || 4173;
 
 var MIME = {
@@ -19,8 +19,8 @@ var MIME = {
 function main() {
   var server = http.createServer(function (req, res) {
     var reqPath = decodeURIComponent(req.url.split('?')[0]);
-    if (reqPath === '/' || reqPath === '/web' || reqPath === '/web/') {
-      reqPath = '/web/index.html';
+    if (reqPath === '/') {
+      reqPath = '/index.html';
     }
 
     var filePath = path.normalize(path.join(ROOT, reqPath));
@@ -45,7 +45,7 @@ function main() {
   });
 
   server.listen(PORT, function () {
-    console.log('Serving ' + ROOT + ' at http://localhost:' + PORT + '/web/');
+    console.log('Serving ' + ROOT + ' at http://localhost:' + PORT);
   });
 }
 
