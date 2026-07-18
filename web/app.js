@@ -195,6 +195,49 @@
     }
   }
 
+  // --- local storage persistence (code + settings, so a reload without a
+  // share link picks up where you left off) ---
+
+  var STATE_KEY = 'textmode:state';
+
+  function saveState() {
+    var options = currentOptions();
+    var state = { code: cm.getValue(), fps: options.fps, cols: options.cols, rows: options.rows };
+    try {
+      localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // localStorage unavailable (private browsing, etc) - state just won't persist.
+    }
+  }
+
+  function loadFromStorage() {
+    var raw;
+    try {
+      raw = localStorage.getItem(STATE_KEY);
+    } catch (e) {
+      return false;
+    }
+    if (!raw) {
+      return false;
+    }
+
+    try {
+      var state = JSON.parse(raw);
+      cm.setValue(state.code || '');
+      fpsInput.value = state.fps || 30;
+      widthInput.value = state.cols || 80;
+      heightInput.value = state.rows || 25;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  cm.on('change', saveState);
+  [fpsInput, widthInput, heightInput].forEach(function (input) {
+    input.addEventListener('change', saveState);
+  });
+
   var flashTimer = null;
   function flashStatus(message) {
     statusEl.textContent = message;
@@ -282,7 +325,7 @@
 
   // --- initial load ---
 
-  if (!loadFromHash()) {
+  if (!loadFromHash() && !loadFromStorage()) {
     cm.setValue(findExample('plasma').code);
   }
 
