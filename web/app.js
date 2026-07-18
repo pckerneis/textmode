@@ -101,8 +101,7 @@
   }
 
   shareBtn.addEventListener('click', function () {
-    var url = buildShareUrl();
-    history.replaceState(null, '', url);
+    var url = window.location.href;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(function () {
@@ -195,47 +194,13 @@
     }
   }
 
-  // --- local storage persistence (code + settings, so a reload without a
-  // share link picks up where you left off) ---
-
-  var STATE_KEY = 'textmode:state';
-
-  function saveState() {
-    var options = currentOptions();
-    var state = { code: cm.getValue(), fps: options.fps, cols: options.cols, rows: options.rows };
-    try {
-      localStorage.setItem(STATE_KEY, JSON.stringify(state));
-    } catch (e) {
-      // localStorage unavailable (private browsing, etc) - state just won't persist.
-    }
+  function syncUrlHash() {
+    history.replaceState(null, '', buildShareUrl());
   }
 
-  function loadFromStorage() {
-    var raw;
-    try {
-      raw = localStorage.getItem(STATE_KEY);
-    } catch (e) {
-      return false;
-    }
-    if (!raw) {
-      return false;
-    }
-
-    try {
-      var state = JSON.parse(raw);
-      cm.setValue(state.code || '');
-      fpsInput.value = state.fps || 30;
-      widthInput.value = state.cols || 80;
-      heightInput.value = state.rows || 25;
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  cm.on('change', saveState);
+  cm.on('change', syncUrlHash);
   [fpsInput, widthInput, heightInput].forEach(function (input) {
-    input.addEventListener('change', saveState);
+    input.addEventListener('change', syncUrlHash);
   });
 
   var flashTimer = null;
@@ -325,7 +290,7 @@
 
   // --- initial load ---
 
-  if (!loadFromHash() && !loadFromStorage()) {
+  if (!loadFromHash()) {
     cm.setValue(findExample('plasma').code);
   }
 
