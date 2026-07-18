@@ -2,24 +2,23 @@
 // keeps its own grid (wrapped at the edges) and only uses the "frame"
 // buffer as an output sink.
 
-var grid = null;
+var cells = null;
 var next = null;
 var lastCols = 0;
 var lastRows = 0;
-var frameCount = 0;
 var STEP_EVERY_N_FRAMES = 3;
 
 function setup(cols, rows) {
   var x, y;
 
-  grid = [];
+  cells = [];
   next = [];
 
   for (y = 0; y < rows; y++) {
-    grid.push([]);
+    cells.push([]);
     next.push([]);
     for (x = 0; x < cols; x++) {
-      grid[y].push(Math.random() < 0.2 ? 1 : 0);
+      cells[y].push(Math.random() < 0.2 ? 1 : 0);
       next[y].push(0);
     }
   }
@@ -39,7 +38,7 @@ function countNeighbors(x, y, cols, rows) {
       }
       nx = (x + dx + cols) % cols;
       ny = (y + dy + rows) % rows;
-      count += grid[ny][nx];
+      count += cells[ny][nx];
     }
   }
 
@@ -51,36 +50,33 @@ function step(cols, rows) {
 
   for (y = 0; y < rows; y++) {
     for (x = 0; x < cols; x++) {
-      alive = grid[y][x];
+      alive = cells[y][x];
       neighbors = countNeighbors(x, y, cols, rows);
       willLive = alive ? (neighbors === 2 || neighbors === 3) : (neighbors === 3);
       next[y][x] = willLive ? 1 : 0;
     }
   }
 
-  tmp = grid;
-  grid = next;
+  tmp = cells;
+  cells = next;
   next = tmp;
 }
 
-function frame(buffer, t, cols, rows) {
+exports.frame = function (grid) {
   var x, y, cell;
 
-  if (grid === null || lastCols !== cols || lastRows !== rows) {
-    setup(cols, rows);
-    frameCount = 0;
+  if (cells === null || lastCols !== width || lastRows !== height) {
+    setup(width, height);
   }
 
-  frameCount++;
-
-  if (frameCount % STEP_EVERY_N_FRAMES === 0) {
-    step(cols, rows);
+  if (frame % STEP_EVERY_N_FRAMES === 0) {
+    step(width, height);
   }
 
-  for (y = 0; y < rows; y++) {
-    for (x = 0; x < cols; x++) {
-      cell = buffer[y][x];
-      if (grid[y][x]) {
+  for (y = 0; y < height; y++) {
+    for (x = 0; x < width; x++) {
+      cell = grid[y][x];
+      if (cells[y][x]) {
         cell.ch = '#';
         cell.fg = 'brightwhite';
       } else {
@@ -89,6 +85,4 @@ function frame(buffer, t, cols, rows) {
       }
     }
   }
-}
-
-exports.frame = frame;
+};

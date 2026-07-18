@@ -28,43 +28,41 @@ function setup(cols, rows) {
   lastCols = cols;
 }
 
-function frame(buffer, t, cols, rows) {
+exports.frame = function (grid) {
   var x, y, drop, headY, dist, cell;
 
-  if (drops === null || lastCols !== cols) {
-    setup(cols, rows);
+  if (drops === null || lastCols !== width) {
+    setup(width, height);
   }
 
-  for (y = 0; y < rows; y++) {
-    for (x = 0; x < cols; x++) {
-      buffer[y][x].ch = ' ';
-      buffer[y][x].fg = 'default';
+  for (y = 0; y < height; y++) {
+    for (x = 0; x < width; x++) {
+      grid[y][x].ch = ' ';
+      grid[y][x].fg = 'default';
     }
   }
 
-  for (x = 0; x < cols; x++) {
+  for (x = 0; x < width; x++) {
     drop = drops[x];
     drop.y += drop.speed;
 
-    if (drop.y - TRAIL_LENGTH > rows) {
-      drop.y = -Math.floor(Math.random() * rows);
+    if (drop.y - TRAIL_LENGTH > height) {
+      drop.y = -Math.floor(Math.random() * height);
       drop.speed = 0.3 + Math.random() * 0.7;
     }
 
     headY = Math.floor(drop.y);
 
-    for (y = 0; y < rows; y++) {
+    for (y = 0; y < height; y++) {
       dist = headY - y;
 
       if (dist < 0 || dist > TRAIL_LENGTH) {
         continue;
       }
 
-      cell = buffer[y][x];
+      cell = grid[y][x];
       cell.ch = randomChar();
       cell.fg = dist === 0 ? 'brightwhite' : 'green';
     }
   }
-}
-
-exports.frame = frame;
+};

@@ -4,23 +4,23 @@
 var CHARS = ' .:-=+*#%@';
 var PALETTE = ['blue', 'cyan', 'green', 'yellow', 'red', 'magenta'];
 
-function value(x, y, t) {
-  var v = Math.sin(x * 0.2 + t) +
-          Math.sin(y * 0.15 + t * 1.3) +
-          Math.sin((x + y) * 0.1 + t * 0.7) +
-          Math.sin(Math.sqrt(x * x + y * y) * 0.1 - t);
+function value() {
+  var v = Math.sin(x * 0.2 + time) +
+          Math.sin(y * 0.15 + time * 1.3) +
+          Math.sin((x + y) * 0.1 + time * 0.7) +
+          Math.sin(Math.sqrt(x * x + y * y) * 0.1 - time);
 
   return (v + 4) / 8; // normalize roughly to 0..1
 }
 
-function char(x, y, t) {
-  var v = value(x, y, t);
+function char() {
+  var v = value();
   var index = Math.floor(v * (CHARS.length - 1));
   return CHARS.charAt(index);
 }
 
-function fg(x, y, t) {
-  var v = value(x, y, t);
+function fg() {
+  var v = value();
   var index = Math.floor(v * (PALETTE.length - 1));
   return PALETTE[index];
 }

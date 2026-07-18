@@ -58,6 +58,7 @@ textmode run examples/fire.js fps=24 w=100 h=30
 textmode run examples/life.js
 textmode run examples/rain.js
 textmode run examples/sine.js
+textmode run examples/cube.js
 ```
 
 ## Writing a shader
@@ -114,8 +115,8 @@ exports.frame = function (buffer, t, cols, rows) {
 
 Since the shader file is just a normal JS module, you can keep your own
 state in plain module-level `var`s - they persist for as long as the
-shader keeps running. See `examples/life.js`, `examples/rain.js`, and
-`examples/fire.js`.
+shader keeps running. See `examples/life.js`, `examples/rain.js`,
+`examples/fire.js`, and `examples/cube.js`.
 
 ### Colors
 
@@ -145,6 +146,7 @@ exports.fg = function (x, y, t, cols, rows) {
 | `examples/rain.js` | frame | Matrix-style digital rain |
 | `examples/life.js` | frame | Conway's Game of Life |
 | `examples/fire.js` | frame | Doom-style fire effect |
+| `examples/cube.js` | frame | Solid-shaded cube spinning in 3D |
 
 ## How it works
 

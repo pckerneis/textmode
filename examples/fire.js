@@ -33,19 +33,19 @@ function setup(cols, rows) {
   lastRows = rows;
 }
 
-function frame(buffer, t, cols, rows) {
+exports.frame = function (grid) {
   var x, y, src, decay, level, spread, cell, paletteEntry;
 
-  if (heat === null || lastCols !== cols || lastRows !== rows) {
-    setup(cols, rows);
+  if (heat === null || lastCols !== width || lastRows !== height) {
+    setup(width, height);
   }
 
-  for (x = 0; x < cols; x++) {
-    heat[rows - 1][x] = PALETTE.length - 1;
+  for (x = 0; x < width; x++) {
+    heat[height - 1][x] = PALETTE.length - 1;
   }
 
-  for (y = 0; y < rows - 1; y++) {
-    for (x = 0; x < cols; x++) {
+  for (y = 0; y < height - 1; y++) {
+    for (x = 0; x < width; x++) {
       src = heat[y + 1][x];
       decay = Math.floor(Math.random() * 3);
       level = src - decay;
@@ -57,27 +57,25 @@ function frame(buffer, t, cols, rows) {
       if (spread < 0) {
         spread = 0;
       }
-      if (spread > cols - 1) {
-        spread = cols - 1;
+      if (spread > width - 1) {
+        spread = width - 1;
       }
 
       heat[y][spread] = level;
     }
   }
 
-  for (y = 0; y < rows; y++) {
-    for (x = 0; x < cols; x++) {
+  for (y = 0; y < height; y++) {
+    for (x = 0; x < width; x++) {
       level = heat[y][x];
       if (level > PALETTE.length - 1) {
         level = PALETTE.length - 1;
       }
 
       paletteEntry = PALETTE[level];
-      cell = buffer[y][x];
+      cell = grid[y][x];
       cell.ch = paletteEntry.ch;
       cell.fg = paletteEntry.fg;
     }
   }
-}
-
-exports.frame = frame;
+};
