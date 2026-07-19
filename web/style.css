@@ -68,6 +68,15 @@ button, input, select {
   color: var(--dim);
   margin-right: 2px;
   font-size: 13px;
+  text-decoration: none;
+}
+
+#logo:visited {
+  color: var(--dim);
+}
+
+#logo:hover {
+  color: var(--text);
 }
 
 .cursor {
