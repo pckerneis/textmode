@@ -1,6 +1,4 @@
-// Matrix-style digital rain. Uses the "frame" style since each column
-// needs to remember its own drop position and speed between frames -
-// state that a stateless per-cell char()/fg() pair can't hold on its own.
+// Matrix-style digital rain
 
 var CHARS = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var TRAIL_LENGTH = 12;

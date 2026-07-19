@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build:exe": "node scripts/build-exe.js",
-    "web": "node scripts/serve-web.js"
+    "web": "node scripts/serve-web.js",
+    "sync": "node scripts/sync-examples.js"
   },
   "license": "MIT",
   "devDependencies": {

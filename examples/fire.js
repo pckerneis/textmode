@@ -1,6 +1,5 @@
 // The classic "Doom fire" cellular automaton: heat rises from the
 // bottom row, decaying and drifting sideways at random as it goes.
-// Uses "frame" because each cell's next heat depends on the cell below it.
 
 var heat = null;
 var lastCols = 0;
