@@ -9,7 +9,7 @@ var previous = null;
 var current = null;
 var next = null;
 
-var DAMP = 0.95;
+var DAMP = 0.9;
 
 function buildGrid() {
   var grid = [];
@@ -36,8 +36,9 @@ exports.frame = function (grid) {
   }
   
   if (frame % 10 == 0) {
-    let x = 8 + Math.floor(Math.random() * (width - 16));
-    let y = 8 + Math.floor(Math.random() * (height - 16));
+    const edge = Math.min(width, height) / 5;
+    let x = edge + Math.floor(Math.random() * (width - 2 * edge));
+    let y = edge + Math.floor(Math.random() * (height - 2 * edge));
     
     const r = 5;
 
@@ -73,7 +74,7 @@ exports.frame = function (grid) {
 			next[y][x] = (sum / (4 + 4 * 0.707) * 2 - prev) * DAMP;
       
       let edge = Math.min(x, y, width-1-x, height-1-y);
-      let absorb = Math.min(1, edge / 12);
+      let absorb = Math.min(1, edge / Math.min(12, width/5, height/5));
       absorb *= absorb;
 
       next[y][x] *= absorb;
