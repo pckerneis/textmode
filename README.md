@@ -87,12 +87,12 @@ textmode help
 Try the bundled examples:
 
 ```
-textmode run examples/plasma.js
+textmode run examples/flow.js
 textmode run examples/fire.js fps=24 w=100 h=30
 textmode run examples/life.js
 textmode run examples/rain.js
-textmode run examples/sine.js
-textmode run examples/cube.js
+textmode run examples/ripple.js
+textmode run examples/plasma.js
 ```
 
 ## Writing a shader
