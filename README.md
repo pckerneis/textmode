@@ -87,12 +87,12 @@ textmode help
 Try the bundled examples:
 
 ```
-textmode run examples/plasma.js
+textmode run examples/flow.js
 textmode run examples/fire.js fps=24 w=100 h=30
 textmode run examples/life.js
 textmode run examples/rain.js
-textmode run examples/sine.js
-textmode run examples/cube.js
+textmode run examples/ripple.js
+textmode run examples/plasma.js
 ```
 
 ## Writing a shader
@@ -175,12 +175,12 @@ exports.fg = function (x, y, t, cols, rows) {
 
 | File | Style | Description |
 |---|---|---|
+| `examples/flow.js`   | per-cell | Plasma-like effect with Perlin noise |
+| `examples/ripple.js` | frame | Simulation of water ripple |
 | `examples/plasma.js` | per-cell | Classic sine-wave plasma effect |
-| `examples/sine.js` | per-cell | A single scrolling sine wave |
 | `examples/rain.js` | frame | Matrix-style digital rain |
 | `examples/life.js` | frame | Conway's Game of Life |
 | `examples/fire.js` | frame | Doom-style fire effect |
-| `examples/cube.js` | frame | Solid-shaded cube spinning in 3D |
 
 ## Web editor
 
