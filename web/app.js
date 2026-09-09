@@ -55,6 +55,8 @@
 
   // --- share link (state lives in the URL fragment, no backend) ---
 
+  var SHARE_STATE_VERSION = 1;
+
   function encodeState(obj) {
     var json = JSON.stringify(obj);
     var bytes = new TextEncoder().encode(json);
@@ -94,7 +96,13 @@
 
   function buildShareUrl() {
     var options = currentOptions();
-    var state = { code: cm.getValue(), fps: options.fps, cols: options.cols, rows: options.rows };
+    var state = {
+      v: SHARE_STATE_VERSION,
+      code: cm.getValue(),
+      fps: options.fps,
+      cols: options.cols,
+      rows: options.rows
+    };
     var url = new URL(window.location.href);
     url.hash = 's=' + encodeState(state);
     return url.toString();
@@ -183,6 +191,10 @@
 
     try {
       var state = decodeState(hash.slice(3));
+      if ((state.v || 0) > SHARE_STATE_VERSION) {
+        flashStatus('This link was created with a newer version of textmode');
+        return false;
+      }
       cm.setValue(state.code || '');
       fpsInput.value = state.fps || 30;
       widthInput.value = state.cols || 80;
